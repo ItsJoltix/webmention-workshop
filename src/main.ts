@@ -1,19 +1,32 @@
 import './style.css'
-import { setupCounter } from './counter.ts'
+import axios from 'axios'
+import * as cheerio from 'cheerio'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
-    <div>
-    <h2>Blogpost van Arno zijn website</h2>
-    <p>Kijk hoe cool deze blogpost is, wow!</p>
-    <a href="https://webmention-client.vercel.app/blogpost1/">Zie hier!</a>
-    <a href="mailto:obelambertus@gmail.com" rel="me">obelambertus@gmail.com</a>
-</div>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
     
+    <div class="card">
+      <button id="button" type="button">Click me</button>
+    </div>
   </div>
 `
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+document.querySelector<HTMLButtonElement>('#button')!.addEventListener('click', async () => {
+    const response = await axios.get('https://webmention-client.vercel.app/');
+    const html = response.data;
+
+    const $ = cheerio.load(html);
+
+    const webmentionEndpoint = $('link[rel="webmention"]').attr('href')
+        || $('a[rel="webmention"]').attr('href'); // Also check <a> tags as a fallback
+
+    if (webmentionEndpoint) {
+        const absoluteEndpoint = new URL(webmentionEndpoint, 'https://webmention-client.vercel.app/').toString();
+        console.log('Webmention endpoint gevonden:', absoluteEndpoint);
+        return absoluteEndpoint;
+    } else {
+        console.warn('Geen Webmention endpoint gevonden op de website.');
+        return null;
+    }
+
+})
