@@ -4,7 +4,6 @@ import * as cheerio from 'cheerio'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
-    
     <div class="card">
       <button id="button" type="button">Click me</button>
     </div>
