@@ -7,6 +7,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <h2>Blogpost van Arno zijn website</h2>
     <p>Kijk hoe cool deze blogpost is, wow!</p>
     <a href="https://webmention-client.vercel.app/blogpost1/">Zie hier!</a>
+    <a href="mailto:obelambertus@gmail.com" rel="me">obelambertus@gmail.com</a>
 </div>
     <div class="card">
       <button id="counter" type="button"></button>
