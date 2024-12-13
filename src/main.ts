@@ -27,8 +27,8 @@ document.querySelector<HTMLButtonElement>('#button')!.addEventListener('click', 
             console.log('Webmention endpoint gevonden:', absoluteEndpoint);
 
             // Step 3: Send the Webmention POST request
-            const source = 'https://your-source-url.com'; // Replace with your source URL
-            const target = 'https://webmention-client.vercel.app/'; // Replace with your target URL
+            const source = 'https://webmention-workshop-nu.vercel.app/'; // Replace with your source URL
+            const target = 'https://webmention-client.vercel.app/blogpost1/'; // Replace with your target URL
 
             const postResponse = await axios.post(absoluteEndpoint, new URLSearchParams({ source, target }), {
                 headers: {
